@@ -9,7 +9,7 @@ import HelloWorld from './components/HelloWorld.vue'
   <HelloWorld msg="Hello World" />
   <p>sss</p>
   <a-button type="primary">
-    Primary
+    Primarywww
   </a-button>
 </template>
 
