@@ -54,6 +54,13 @@ export default ({command, mode}) => {
           replacement: pathResolve('src') + '/',
         }
       ]
+    },
+    css: {
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true
+        }
+      }
     }
   }
 }
