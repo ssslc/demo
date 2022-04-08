@@ -36,7 +36,7 @@ function pathResolve(dir) {
 //   return resolve(process.cwd(), '.', dir);
 // }
 
-export default ({command, mode}) => {
+export default ({ command, mode }) => {
   const root = process.cwd()
   const env = loadEnv(mode, root);
   constenv = loadEnv(mode, root)
