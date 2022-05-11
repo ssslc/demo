@@ -16,7 +16,6 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter()
-    console.log(router, 'router')
   }
 })
 </script>
@@ -28,3 +27,8 @@ export default defineComponent({
   <!-- <router-link to="/about">Go to About</router-link> -->
   <router-view></router-view>
 </template>
+<style lang="less">
+input:-internal-autofill-selected {
+  background-color: rgba(255, 255, 255, 0%) !important;
+}
+</style>

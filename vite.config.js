@@ -48,12 +48,25 @@ export default ({ command, mode }) => {
     plugins: [vue()],
     root,
     resolve: {
+      name: 'Forest',
       alias: [
         {
           find: /@\//,
           replacement: pathResolve('src') + '/',
         }
       ]
+    },
+    css: {
+      preprocessorOptions: {
+        less: {
+          modifyVars: {
+            'primary-color': '#1DA57A',
+            'link-color': '#1DA57A',
+            'border-radius-base': '2px',
+          },
+          javascriptEnabled: true,
+        },
+      }
     }
   }
 }

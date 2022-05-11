@@ -5,9 +5,11 @@ import 'ant-design-vue/dist/antd.css';
 import '/@/utils/test.ts'
 import router from './router'
 import './router/guard'
+import '/@/style/index.less'
 
-
-
+if (import.meta.env.DEV) {
+  import('ant-design-vue/dist/antd.less');
+}
 const app = createApp(App)
 app.use(Antd)
 app.config.productionTip = false
