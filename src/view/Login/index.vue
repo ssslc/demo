@@ -21,17 +21,18 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { setToken } from '/@/utils/cookie-handle'
 export default defineComponent({
   setup() {
     const formLogin = reactive({
       name: 'forest',
       password: '123456'
     })
-    const useRouters = useRouter()
+    const router = useRouter()
     const loginHandle = () => {
-      console.log('loginHandle', useRouters)
-      useRouters.push({
-        name: 'homePage'
+      setToken('userInfo', new Date())
+      router.push({
+        path: '/homePage'
       })
     }
     return {

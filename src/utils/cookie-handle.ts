@@ -1,15 +1,14 @@
 import Cookies from 'js-cookie'
 
-const tokenKey = 'Forest-Token'
-
-export function getToken() {
-  return Cookies.get(tokenKey)
+export function getToken(tokenName: string) {
+  return Cookies.get(tokenName)
 }
 
-export function setToken(token: string) {
-  return Cookies.set(tokenKey, token)
+
+export function setToken(tokenName: string, tokenValue: string) {
+  return Cookies.set(tokenName, tokenValue)
 }
 
-export function removeToken() {
-  return Cookies.remove(tokenKey)
+export function removeToken(tokenName: string) {
+  return Cookies.remove(tokenName)
 }

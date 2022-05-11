@@ -2,7 +2,12 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 // import type { AppRouteRecordRaw } from '/@/router/types';
 import Layout from '/@/layout/index.vue'
 const routes = [
-  { path: '/login', name: 'login', component: () => import('/@/view/Login/index.vue') },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('/@/view/Login/index.vue'),
+    meta: { auth: false }
+  },
   {
     path: '/',
     redirect: '/homePage',
@@ -13,7 +18,7 @@ const routes = [
         component: () => import('/@/view/HomePage/index.vue')
       }
     ]
-  },
+  }
 ]
 
 const router = createRouter({
