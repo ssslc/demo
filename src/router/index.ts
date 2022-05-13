@@ -1,21 +1,41 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 // import type { AppRouteRecordRaw } from '/@/router/types';
 import Layout from '/@/layout/index.vue'
-const routes = [
+import { AppRouteRecordRaw } from './types'
+const routes: AppRouteRecordRaw[] = [
   {
     path: '/login',
     name: 'login',
     component: () => import('/@/view/Login/index.vue'),
-    meta: { auth: false }
+    meta: { requiresAuth: false }
   },
   {
     path: '/',
     redirect: '/homePage',
+    name: 'homePage',
     component: Layout, //() => import('/@/view/HomePage/index.vue')
+    meta: { requiresAuth: true },
     children: [
       {
         path: 'homepage',
-        component: () => import('/@/view/HomePage/index.vue')
+        name: 'designCom',
+        component: () => import('/@/view/HomePage/index.vue'),
+        meta: { requiresAuth: true }
+      }
+    ]
+  },
+  {
+    path: '/lazyLoading',
+    redirect: '/lazyLoading/waterfall',
+    name: 'lazyLoading',
+    component: Layout,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: 'waterfall',
+        name: 'waterfall',
+        component: () => import('/@/view/lazyLoading/index.vue'),
+        meta: { requiresAuth: true }
       }
     ]
   }

@@ -4,7 +4,7 @@ import { getToken } from '/@/utils/cookie-handle'
 router.beforeEach(async (to, from, next) => {
   const meta = to.meta
   const haveToken = getToken('userInfo')
-  if (haveToken || !meta.auth) {
+  if (haveToken || !meta.requiresAuth) {
     next()
   } else {
     router.push({
