@@ -5,3 +5,10 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 ## Recommended IDE Setup
 
 - [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+
+# tsconfig
+# types 默认所有打包可见,全引入  types 被设置为 [] ,这样是全部不导入
+# 指定 不要将以下特定文件全导入type类型
+-"types": [ 
+    "vite/client" 
+  ],

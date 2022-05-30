@@ -1,8 +1,6 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-// import type { AppRouteRecordRaw } from '/@/router/types';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '/@/layout/index.vue'
-import { AppRouteRecordRaw } from './types'
-const routes: AppRouteRecordRaw[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'login',
@@ -14,7 +12,6 @@ const routes: AppRouteRecordRaw[] = [
     redirect: '/homePage',
     name: 'homePage',
     component: Layout, //() => import('/@/view/HomePage/index.vue')
-    meta: { requiresAuth: true },
     children: [
       {
         path: 'homepage',
@@ -29,13 +26,24 @@ const routes: AppRouteRecordRaw[] = [
     redirect: '/lazyLoading/waterfall',
     name: 'lazyLoading',
     component: Layout,
-    meta: { requiresAuth: true },
     children: [
       {
         path: 'waterfall',
         name: 'waterfall',
-        component: () => import('/@/view/lazyLoading/index.vue'),
-        meta: { requiresAuth: true }
+        component: () => import('/@/view/lazyLoading/index.vue')
+      }
+    ]
+  },
+  {
+    path: '/myComponents',
+    redirect: '/myComponents/index',
+    name: 'myComponents',
+    component: Layout,
+    children: [
+      {
+        path: 'mySelect',
+        name: 'mySelect',
+        component: () => import('/@/view/myComponents/index.vue')
       }
     ]
   }
@@ -47,8 +55,3 @@ const router = createRouter({
   routes, // `routes: routes` 的缩写
 })
 export default router
-// const routes = [
-//   // { path: '/', component: './src/view/Login/index.vue' },
-//   { path: '/', component: '/@/view/Login/index.vue' },
-//   { path: '/about', component: './src/components/HelloWorld.vue' },
-// ]

@@ -1,7 +1,7 @@
 <template>
   <a-layout>
     <a-layout-header class="header">
-      <div class="logo" />
+      <div class="logo" id="testid" />
       <a-menu
         v-model:selectedKeys="selectedKeys1"
         theme="dark"
@@ -11,6 +11,7 @@
         <a-menu-item key="1">nav 1</a-menu-item>
         <a-menu-item key="2">nav 2</a-menu-item>
         <a-menu-item key="3">nav 3</a-menu-item>
+        <a-menu-item key="4">login out</a-menu-item>
       </a-menu>
     </a-layout-header>
     <a-layout-content style="padding: 0 50px">
@@ -27,7 +28,7 @@
             mode="inline"
             style="height: 100%"
           >
-            <a-sub-menu key="sub1">
+            <!-- <a-sub-menu key="sub1">
               <template #title>
                 <span>
                   <user-outlined />
@@ -63,6 +64,9 @@
               <a-menu-item key="11">option11</a-menu-item>
               <a-menu-item key="12">option12</a-menu-item>
             </a-sub-menu>
+            <a-sub-menu key="sub4">
+              <template #title> single-router </template>
+            </a-sub-menu> -->
           </a-menu>
         </a-layout-sider>
         <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
@@ -93,12 +97,15 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter()
+    console.log(router.getRoutes(), 'router')
+    const routerArr = router.getRoutes()
     const key = computed(() => router.path)
     return {
       selectedKeys1: ref<string[]>(['2']),
       selectedKeys2: ref<string[]>(['1']),
       openKeys: ref<string[]>(['sub1']),
-      key
+      key,
+      routerArr
     }
   }
 })
