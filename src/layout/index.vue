@@ -28,7 +28,7 @@
             mode="inline"
             style="height: 100%"
           >
-            <!-- <a-sub-menu key="sub1">
+            <a-sub-menu key="sub1">
               <template #title>
                 <span>
                   <user-outlined />
@@ -64,7 +64,8 @@
               <a-menu-item key="11">option11</a-menu-item>
               <a-menu-item key="12">option12</a-menu-item>
             </a-sub-menu>
-            <a-sub-menu key="sub4">
+            <a-menu-item key="13"><notification-outlined /> option12</a-menu-item>
+            <!-- <a-sub-menu key="sub4">
               <template #title> single-router </template>
             </a-sub-menu> -->
           </a-menu>
@@ -81,19 +82,22 @@
       </a-layout>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
-      Ant Design ©2018 Created by Ant UED
+      Forest Design ©2018 Created by Ant UED
     </a-layout-footer>
+    <slider-Item></slider-Item>
   </a-layout>
 </template>
 <script lang="ts">
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue'
 import { defineComponent, ref, computed } from 'vue'
+import sliderItem from './components/sliderItem.vue'
 import { useRouter } from 'vue-router'
 export default defineComponent({
   components: {
     UserOutlined,
     LaptopOutlined,
-    NotificationOutlined
+    NotificationOutlined,
+    sliderItem
   },
   setup() {
     const router = useRouter()
