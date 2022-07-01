@@ -30,7 +30,9 @@ export default defineComponent({
     })
     const router = useRouter()
     const loginHandle = () => {
+      // 步骤一 设置token
       setToken('userInfo', new Date())
+      // 步骤二 登录成功后跳转页面
       router.push({
         path: '/homePage'
       })

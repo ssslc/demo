@@ -20,8 +20,8 @@
         <a-breadcrumb-item>List</a-breadcrumb-item>
         <a-breadcrumb-item>App</a-breadcrumb-item>
       </a-breadcrumb>
-      <a-layout style="padding: 24px 0; background: #fff">
-        <a-layout-sider width="200" style="background: #fff">
+      <a-layout class="md-block">
+        <a-layout-sider width="200" :style="{ maxHeight: mdBlock }">
           <a-menu
             v-model:selectedKeys="selectedKeys2"
             v-model:openKeys="openKeys"
@@ -68,6 +68,7 @@
             <!-- <a-sub-menu key="sub4">
               <template #title> single-router </template>
             </a-sub-menu> -->
+            <slider-Item v-for="item in routerArr" :item="item" :key="item.path"></slider-Item>
           </a-menu>
         </a-layout-sider>
         <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
@@ -81,10 +82,6 @@
         </a-layout-content>
       </a-layout>
     </a-layout-content>
-    <a-layout-footer style="text-align: center">
-      Forest Design ©2018 Created by Ant UED
-    </a-layout-footer>
-    <slider-Item></slider-Item>
   </a-layout>
 </template>
 <script lang="ts">
@@ -92,6 +89,7 @@ import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/
 import { defineComponent, ref, computed } from 'vue'
 import sliderItem from './components/sliderItem.vue'
 import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 export default defineComponent({
   components: {
     UserOutlined,
@@ -104,12 +102,14 @@ export default defineComponent({
     console.log(router.getRoutes(), 'router')
     const routerArr = router.getRoutes()
     const key = computed(() => router.path)
+    const mdBlock = window.innerHeight - 118
     return {
       selectedKeys1: ref<string[]>(['2']),
       selectedKeys2: ref<string[]>(['1']),
       openKeys: ref<string[]>(['sub1']),
       key,
-      routerArr
+      routerArr,
+      mdBlock
     }
   }
 })
@@ -131,4 +131,7 @@ export default defineComponent({
 .site-layout-background {
   background: #fff;
 }
+/* .md-block {
+  max-height: calc(100% - 118px);
+} */
 </style>
