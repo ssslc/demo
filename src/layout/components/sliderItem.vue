@@ -1,3 +1,33 @@
+<script setup>
+import {
+  UserOutlined,
+  LaptopOutlined,
+  MailOutlined,
+  AppstoreOutlined,
+  ClusterOutlined,
+  FireOutlined
+} from '@ant-design/icons-vue'
+import { useStore } from '/@/stores/index.js'
+import { storeToRefs } from 'pinia'
+import path from 'path'
+
+const props = defineProps({
+  item: {
+    type: Object
+  },
+  basePath: {
+    type: String
+  }
+})
+
+const store = useStore()
+const { routes } = storeToRefs(store)
+// 拼接全router地址
+const resolvuePath = paramPath => {
+  // console.log('拼接router', props.basePath, paramPath, path.resolve(props.basePath, paramPath))
+  return path.resolve(props.basePath, paramPath)
+}
+</script>
 <template>
   <div class="sliderItem-com">
     <!-- 放在里面会继续循环routes -->
@@ -7,56 +37,46 @@
       </a-sub-menu>
       <a-sub-menu key="sub1" v-else> {{ item.name }}</a-sub-menu>
     </template> -->
-    <template v-if="item.children === undefined || item.children.length === 0">
-      <a-menu-item :key="item.path">{{ item.name }}</a-menu-item>
+
+    <!-- <template v-if="item.children && item.children.length === 1">
+      <a-menu-item :key="item.path" v-if="item.meta && !item.meta.isHide">
+        <router-link :to="item.path">{{ item.name + '1' }}</router-link>
+      </a-menu-item>
     </template>
     <a-sub-menu :key="item.path" v-else>
+      <template #title>
+        <span>
+          <template v-if="item.meta && item.meta.icon">
+            <component :is="item.meta.icon" class="pd-r-5"></component>
+          </template>
+          {{ item.name + '2' }}
+        </span>
+      </template>
+      <slider-item v-for="ele in item.children" :key="ele.path" :item="ele"></slider-item>
+    </a-sub-menu> -->
+
+    <a-sub-menu :key="item.path" v-if="item.children && item.children.length > 1">
       <template #title>
         <span>
           <user-outlined />
           {{ item.name }}
         </span>
       </template>
-      <slider-item v-for="ele in item.children" :key="ele.path" :item="ele"></slider-item>
+      <slider-item
+        v-for="ele in item.children"
+        :key="ele.path"
+        :item="ele"
+        :basePath="resolvuePath(ele.path)"
+      ></slider-item>
     </a-sub-menu>
-
-    <!-- 复杂项应当放在后面 -->
-    <!-- <a-sub-menu :key="item.path" v-if="item.children > 0">
-      <template #title>
-        <span>
-          <user-outlined />
-          2{{ item.name }}
-        </span>
-      </template>
-      <a-menu-item key="1" v-if="">option1</a-menu-item>
-      <slider-item v-for="ele in item.children" :key="ele.path" :item="ele"></slider-item>
-    </a-sub-menu>
-    <a-menu-item :key="item.path" v-else> 1{{ item.name }}</a-menu-item> -->
+    <template v-else>
+      <a-menu-item :key="item.path">
+        <router-link :to="basePath ? basePath : item.path" :title="item.path">{{
+          item.name
+        }}</router-link>
+      </a-menu-item>
+    </template>
   </div>
 </template>
-
-<script>
-import { defineComponent } from 'vue'
-import { useStore } from '/@/stores/index.js'
-import { storeToRefs } from 'pinia'
-export default defineComponent({
-  name: 'sliderItem',
-  props: {
-    item: {
-      type: Object
-    }
-  },
-  setup(props, context) {
-    const store = useStore()
-    const { routes } = storeToRefs(store)
-    // console.log(routes.value, 'routes')
-    // store.getRoutes([2])
-    // console.log(routes.value, 'routes.value')
-    return {
-      item: props.item
-    }
-  }
-})
-</script>
 
 <style></style>

@@ -13,7 +13,6 @@ function pathResolve(dir) {
 export default defineConfig(({ command, mode }) => {
   const root = process.cwd()
   const env = loadEnv(mode, root);
-  constenv = loadEnv(mode, root)
   const viteEnv = wrapperEnv(env)
   const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv
   // const isBuild = command === 'build';
@@ -37,6 +36,7 @@ export default defineConfig(({ command, mode }) => {
             'primary-color': '#1DA57A',
             'link-color': '#1DA57A',
             'border-radius-base': '2px',
+            // 'layout-header-background': '#fff'
           },
           javascriptEnabled: true,
         },
@@ -44,6 +44,9 @@ export default defineConfig(({ command, mode }) => {
     },
     optimizeDeps: {
       include: ['@ant-design/icons-vue']
+    },
+    define: {
+      'process.env': {} // 定义process变量，解决 process is not defined
     }
   }
 })

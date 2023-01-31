@@ -1,17 +1,20 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '/@/layout/index.vue'
-const routes: RouteRecordRaw[] = [
+export const routes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'login',
     component: () => import('/@/view/Login/index.vue'),
-    meta: { requiresAuth: false }
+    meta: { requiresAuth: false, isHide: true }
   },
   {
     path: '/',
     redirect: '/homePage',
     name: 'homePage',
-    component: Layout, //() => import('/@/view/HomePage/index.vue')
+    component: Layout,
+    meta: {
+      icon: 'FireOutlined'
+    },
     children: [
       {
         path: 'homepage',
@@ -21,29 +24,41 @@ const routes: RouteRecordRaw[] = [
       }
     ]
   },
+
   {
     path: '/lazyLoading',
     redirect: '/lazyLoading/waterfall',
     name: 'lazyLoading',
+    meta: {
+      icon: 'ClusterOutlined'
+    },
     component: Layout,
     children: [
       {
         path: 'waterfall',
         name: 'waterfall',
-        component: () => import('/@/view/lazyLoading/index.vue')
+        component: () => import('/@/view/lazyLoading/waterfall.vue'),
+        meta: { requiresAuth: true }
       }
     ]
   },
   {
     path: '/myComponents',
-    redirect: '/myComponents/index',
+    redirect: '/myComponents/mySelect',
     name: 'myComponents',
     component: Layout,
     children: [
       {
         path: 'mySelect',
         name: 'mySelect',
-        component: () => import('/@/view/myComponents/index.vue')
+        component: () => import('/@/view/myComponents/mySelect.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'myInput',
+        name: 'myInput',
+        component: () => import('/@/view/myComponents/myInput.vue'),
+        meta: { requiresAuth: true }
       }
     ]
   }
