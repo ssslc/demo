@@ -5,10 +5,18 @@
       <a-form>
         <h2 class="theme-txt">Forset</h2>
         <a-form-item class="form-item" name="name">
-          <a-input v-model="formLogin.name" placeholder="Please input your account" />
+          <a-input
+            id="input-login-name"
+            v-model="formLogin.name"
+            placeholder="Please input your account"
+          />
         </a-form-item>
         <a-form-item class="form-item" name="password">
-          <a-input-password v-model="formLogin.password" placeholder="Please input your password" />
+          <a-input-password
+            id="input-login-password"
+            v-model="formLogin.password"
+            placeholder="Please input your password"
+          />
         </a-form-item>
         <a-form-item>
           <a-button type="primary" html-type="submit" @click="loginHandle()">Login</a-button>
@@ -59,6 +67,12 @@ export default defineComponent({
     right: 30%;
     top: 40%;
   }
+  :deep(input::placeholder) {
+    color: rgb(85, 100, 95);
+  }
+  // #input-login-name, #input-login-password {
+
+  // }
   :deep(.ant-input) {
     background-color: rgb(255 255 255 / 50%);
     // border-top: none;
